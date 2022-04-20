@@ -1,40 +1,47 @@
-.header{
+* {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+body {
+    background-color: #FAFAFA;
+}
+
+header{
     width: 100%;
     height: 69px;
+    position: fixed;
     top: 0px;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #EC362D;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    position: fixed;
 }
 
-.container{
+main{
     width: 100%;
-    background-color: #E5E5E5E5;
     display: flex;
     justify-content: center;
 }
+
 .insert-quizz{
     width: 100%;
     height: 181px;
     margin-left: 13.5%;
     margin-right: 13.5%;
-
     margin-top: 146px;
     background: #FAFAFA;
     border: 1px dashed #D5D5D5;
     box-sizing: border-box;
     border-radius: 5px;
-
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
     padding: 33px;
 }
+
 .create-quizz-button{
     width: 151px;
     height: 40px;
@@ -42,15 +49,13 @@
     border: 1px dashed #EC362D;
     box-sizing: border-box;
     border-radius: 50px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 21px;
+    line-height: 25px;
+    color: #EC362D;
 }
 
 /* texts */
 h1{
-    font-family: 'Roboto';
-    font-style: normal;
     font-weight: 700;
     font-size: 37px;
     line-height: 43px;
@@ -58,26 +63,10 @@ h1{
 }
 .null-quizz{
     height: 107px;
-
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
     font-size: 20px;
     line-height: 23px;
     display: flex;
     align-items: center;
     text-align: center;
     color: #B9B9B9;
-}
-.text-quizz-create{
-    font-family: 'Roboto';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 21px;
-    line-height: 25px;
-    display: flex;
-    align-items: center;
-    text-align: center;
-
-    color: #EC362D;
 }
