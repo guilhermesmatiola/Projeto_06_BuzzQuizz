@@ -31,34 +31,47 @@
         </div>
         <button class="">Prosseguir pra criar perguntas</button> -->
 
+        <!--questions-->
         <div class="quizz-questions">
             <div class="create-questions-title"><strong>Crie suas perguntas</strong></div> 
             <div class="question-box">
 
                 <div class="first-question">
                     <h2>Pergunta ${}</h2>
-                    <input class="questions-answers" type="text" placeholder="Texto da pergunta">
-                    <input class="questions-answers" type="text" placeholder="Cor de fundo da pergunta">
-                    <h2>Resposta correta</h2>
-                    <input class="questions-answers" type="text" placeholder="Resposta correta">
-                    <input class="questions-answers" type="text" placeholder="URL de imagem">
-                    <h2>Respostas incorretas</h2>
-                    <input class="questions-answers" type="text" placeholder="Resposta incorreta 1">
-                    <input class="questions-answers" type="text" placeholder="URL de imagem 1">
-                    <input class="questions-answers" type="text" placeholder="Resposta incorreta 2">
-                    <input class="questions-answers" type="text" placeholder="URL de imagem 2">
-                    <input class="questions-answers" type="text" placeholder="Resposta incorreta 3">
-                    <input class="questions-answers" type="text" placeholder="URL de imagem 3">
+
+                    <div class="table-question">
+                        <input class="questions-answers" type="text" placeholder="Texto da pergunta">
+                        <input class="questions-answers" type="text" placeholder="Cor de fundo da pergunta">
+                        <h2>Resposta correta</h2>
+                        <input class="questions-answers" type="text" placeholder="Resposta correta">
+                        <input class="questions-answers" type="text" placeholder="URL de imagem">
+                        <h2>Respostas incorretas</h2>
+                        <input class="questions-answers" type="text" placeholder="Resposta incorreta 1">
+                        <input class="questions-answers" type="text" placeholder="URL de imagem 1">
+                        <input class="questions-answers" type="text" placeholder="Resposta incorreta 2">
+                        <input class="questions-answers" type="text" placeholder="URL de imagem 2">
+                        <input class="questions-answers" type="text" placeholder="Resposta incorreta 3">
+                        <input class="questions-answers" type="text" placeholder="URL de imagem 3">
+                    </div>
+                    
 
                 </div>
-                <div class="next-question">
-                    <h2>Pergunta ${}</h2>
-                    <img class="vector-image" src="media/Vector.png" onclick="">
+                <div class="other-question">
+                    <div class="next-question">
+                        <h2>Pergunta ${}</h2>
+                        <img class="vector-image" src="media/Vector.png" onclick="insertAnswers()">
+                    </div>
+                <!--Colocar com o inner o table-question aqui e remover a img-->
                 </div>
-                <div class="next-question">
-                    <h2>Pergunta ${}</h2>
-                    <img class="vector-image" src="media/Vector.png" onclick="">
+
+                <div class="first-question">
+                    <div class="next-question">
+                        <h2>Pergunta ${}</h2>
+                        <img class="vector-image" src="media/Vector.png" onclick="insertAnswers()">
+                    </div>
+                    <!--Colocar com o inner o table-question aqui e remover a img-->
                 </div>
+
                 <button class="create-levels-button">Prosseguir pra criar níveis</button>
 
                 

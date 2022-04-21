@@ -162,17 +162,9 @@ input{
     margin-bottom: 24px;
 }
 .next-question{
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
-    box-sizing: border-box;
-    padding-left: 18px;
-    padding-right: 18px;
-    padding-bottom: 27px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
-
 }
 
 .questions-answers{
@@ -181,6 +173,7 @@ input{
 
 .vector-image{
     margin-top: 26px;
+    display: block;
 }
 
 .create-levels-button{
@@ -190,4 +183,21 @@ input{
     height: 54px;
     border-radius: 15px;
     color: #FFFFFF;
+    margin-top: 54px;
+}
+.table-question{
+    display: flex;
+    flex-direction: column;
+}
+.other-question{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 27px;
+    display: flex;
+    flex-direction: column;
+    
+    margin-bottom: 24px;
 }
