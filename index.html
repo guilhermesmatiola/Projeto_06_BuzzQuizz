@@ -13,11 +13,11 @@
 </head>
 <body>
     <header>
-        <h1>BuzzQuizz</h1>
+        <h1 onclick="homepage()">BuzzQuizz</h1>
     </header>
     <main class="flex-container">
-        <!-- <button onclick="creatQuizz();"><ion-icon name="add-circle"></ion-icon></button> -->
-        <!-- <div class="insert-quizz flex-container">
+        <!-- <button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
+        <div class="insert-quizz flex-container">
             <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
             <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
         </div> -->
@@ -29,10 +29,10 @@
             <input type="text" placeholder="Quantidade de perguntas do quizz">
             <input type="text" placeholder="Quantidade de níveis do quizz">
         </div>
-        <button class="">Prosseguir pra criar perguntas</button> -->
+        <button class="create-levels-button" onclick="questionsCreate();">Prosseguir pra criar perguntas</button> -->
 
-        <!--questions-->
-        <div class="quizz-questions">
+        <!--questions---------------questions-->
+        <!-- <div class="quizz-questions">
             <div class="create-questions-title"><strong>Crie suas perguntas</strong></div> 
             <div class="question-box">
 
@@ -54,14 +54,13 @@
                         <input class="questions-answers" type="text" placeholder="URL de imagem 3">
                     </div>
                     
-
                 </div>
+
                 <div class="other-question">
                     <div class="next-question">
                         <h2>Pergunta ${}</h2>
                         <img class="vector-image" src="media/Vector.png" onclick="insertAnswers()">
                     </div>
-                <!--Colocar com o inner o table-question aqui e remover a img-->
                 </div>
 
                 <div class="first-question">
@@ -69,15 +68,54 @@
                         <h2>Pergunta ${}</h2>
                         <img class="vector-image" src="media/Vector.png" onclick="insertAnswers()">
                     </div>
-                    <!--Colocar com o inner o table-question aqui e remover a img-->
                 </div>
 
-                <button class="create-levels-button">Prosseguir pra criar níveis</button>
+                <button class="create-levels-button" onclick="createLevels();">Prosseguir pra criar níveis</button>
+
+                
+            </div>
+        </div> -->
+
+        <!-- --------NIVEIS DO QUIZZ ----------------->
+        <!-- <div class="quizz-levels">
+            <div class="create-questions-title"><strong>Agora, decida os níveis</strong></div> 
+
+            <div class="question-box">
+
+                <div class="first-question">
+                    <h2>Nível ${}</h2>
+
+                    <div class="table-question">
+                        <input class="questions-answers" type="text" placeholder="Título do nível">
+                        <input class="questions-answers" type="text" placeholder="% de acerto mínima">
+                        <input class="questions-answers" type="text" placeholder="URL de imagem do nível">
+                        <input class="questions-answers" type="text" placeholder="Descrição do nível">
+                        
+                    </div>
+                    
+                </div>
+
+                <div class="other-question">
+                    <div class="next-question">
+                        <h2>Nível ${}</h2>
+                        <img class="vector-image" src="media/Vector.png" onclick="insertAnswers()">
+                    </div>
+                </div>
+
+                <div class="first-question">
+                    <div class="next-question">
+                        <h2>Nível ${}</h2>
+                        <img class="vector-image" src="media/Vector.png" onclick="insertAnswers()">
+                    </div>
+                </div>
+
+                <button class="create-levels-button">Finizalizar Quizz</button>
 
                 
             </div>
 
-        </div>
+
+        </div> -->
 
     </main>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

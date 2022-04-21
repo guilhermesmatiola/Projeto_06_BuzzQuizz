@@ -201,3 +201,18 @@ input{
     
     margin-bottom: 24px;
 }
+.create-question-button {
+    margin: auto;
+    background-color: #EC362D;
+    width: 353.91px;
+    height: 54px;
+    border-radius: 15px;
+    color: #FFFFFF;
+}
+/*QUIZZ LEVELS*/
+
+.quizz-levels{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
