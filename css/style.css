@@ -61,10 +61,21 @@ main{
 
 /* texts */
 h1{
+    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 37px;
     line-height: 43px;
     color: #FFFFFF;
+}
+h2{
+    font-family: 'Roboto';
+
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 23px;
+    color: #000000;
+    margin-bottom: 12px;
+    margin-top: 27px;
 }
 .null-quizz{
     height: 107px;
@@ -110,4 +121,59 @@ strong {
     font-size: 19px;
     font-style: italic;
     color: #BABABA;
+}
+
+/*quizz questions */
+.create-questions-title{
+    margin-bottom: 36px;
+}
+.quizz-questions{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.question-box{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+
+    
+}
+input{
+    font-style: italic;
+    padding-left: 23px;
+    height: 46px;
+    background: #FFFFFF;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    border-radius: 5px;
+}
+.first-question{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 27px;
+    display: flex;
+    flex-direction: column;
+    
+    margin-bottom: 24px;
+}
+.next-question{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    box-sizing: border-box;
+    padding-left: 18px;
+    padding-right: 18px;
+    padding-bottom: 27px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 24px;
+
+}
+
+.questions-answers{
+    margin-bottom: 14px;
 }
