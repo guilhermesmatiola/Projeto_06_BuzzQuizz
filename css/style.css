@@ -169,11 +169,25 @@ input{
     padding-right: 18px;
     padding-bottom: 27px;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 24px;
 
 }
 
 .questions-answers{
     margin-bottom: 14px;
+}
+
+.vector-image{
+    margin-top: 26px;
+}
+
+.create-levels-button{
+    margin:auto;
+    background-color: #EC362D;
+    width: 353.91px;
+    height: 54px;
+    border-radius: 15px;
+    color: #FFFFFF;
 }
