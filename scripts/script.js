@@ -1,4 +1,4 @@
-let listQuizz = [];
+let listaQuizz = [];
 let title;
 let image;
 let questions;
@@ -19,7 +19,7 @@ let question={
 let answer={
     text: "Texto da resposta 1",
     image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-    isCorrectAnswer: true
+    isCorrectAnswer: value
 };
 let level ={
     title: "Título do nível 1",
@@ -179,20 +179,21 @@ function readINFOQuizzPg2() {
     for(let i =0;i<questions;i++){
         question.title=document.getElementById(`a${i+1}1`).value;
         question.color=document.getElementById(`a${i+1}2`).value;
-        
+     //   O TRUE NÃO ESTÁ PEGANDO
         answer.text=document.getElementById(`a${i+1}3`).value;
         answer.image=document.getElementById(`a${i+1}4`).value;
         answer.isCorrectAnswer=true;
+   //     console.log(answer + 'errado');
         question.answers[0]=answer;
         answer.text=document.getElementById(`a${i+1}5`).value;
         answer.image=document.getElementById(`a${i+1}6`).value;
         answer.isCorrectAnswer=false;
+      //  console.log(answer);
         question.answers[1]=answer;
-        //QUANTAS RESPOSTAS???????????????????!!!!!!!!!!!
         answer.text=document.getElementById(`a${i+1}7`).value;
         answer.image=document.getElementById(`a${i+1}8`).value;
         answer.isCorrectAnswer=false;
-        question.answers[2]=answer;
+       // question.answers[2]=answer;
         answer.text=document.getElementById(`a${i+1}9`).value;
         answer.image=document.getElementById(`a${i+1}10`).value;
         answer.isCorrectAnswer=false;
