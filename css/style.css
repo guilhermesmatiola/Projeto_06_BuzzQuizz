@@ -23,6 +23,7 @@ header{
     align-items: center;
     background: #EC362D;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    z-index: 4;
 }
 
 main{
@@ -92,7 +93,7 @@ ion-icon {
     font-size: 31px;
 }
 
-/* quizz creation page */
+/* quizz creation page ---essa seção está ok*/ 
 
 strong {
     font-weight: 700;
@@ -122,8 +123,77 @@ strong {
     font-style: italic;
     color: #BABABA;
 }
-
-/*quizz questions */
+/*---------NEW----------- ESSA É A PARTE DE INSERÇÃO DOS QUIZZES DO SERVIDOR, PRECISA AJUSTAR O CSS TODO AINDA;*/
+.other-quizzes{
+    margin-top: 70px;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+.first-pageQuizzes{
+    background-color: #FAFAFA;
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 1050px;
+    height: 181px;
+}
+/* .gradient {
+    width: 340px;
+    height: 180px;
+    border-radius: 6px;
+    /* margin-left: 12px;
+    margin-bottom: 12px; 
+    background: linear-gradient(0deg, #000000,transparent);
+    position: absolute;
+} 
+*/
+.quizzBox{
+    margin-top: 50px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.quizzBox>img{  
+    border-radius: 6px;
+    width: 340px;
+    height: 180px;
+    cursor: pointer;
+    position: relative;
+}
+.quizzBox>h3{
+    max-width: 300px;
+    position: absolute;
+    z-index: 1;
+    bottom: 6px;
+    left: 24px;
+    font-size: 18px;
+    line-height: 25px;
+    text-align: start;
+    word-wrap: break-word;
+}
+.texto{
+    color: #FFFFFF;
+    position: absolute;
+    z-index: 1;
+    font-size: 19px;
+}
+.textQuizzTitle{
+    font-weight: 700;
+    text-align: start;
+    font-size: 20px;
+}
+h4{
+    /*PASSAR CSS PARA FICAR ACIMA DA IMAGEM*/
+    font-style: normal;
+}
+/*-------------------FINAL DO NEWWWWWWWWWW----------------------------*/
+/*quizz questions -------ESSA SEÇÃO ESTÁ OK*/
 .create-questions-title{
     margin-bottom: 36px;
 }
@@ -184,6 +254,7 @@ input{
     border-radius: 15px;
     color: #FFFFFF;
     margin-top: 54px;
+    margin-bottom: 12px;
 }
 .table-question{
     display: flex;
