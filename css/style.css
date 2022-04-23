@@ -93,6 +93,7 @@ h2{
 ion-icon {
     color: #EC362D;
     font-size: 31px;
+    display: none;
 }
 
 /* quizz creation page ---essa seção está ok*/ 
@@ -193,6 +194,7 @@ h4:hover {
     font-weight: 700;
     text-align: start;
     font-size: 20px;
+    display: flex;
 }
 
 /*-------------------FINAL DO NEWWWWWWWWWW----------------------------*/
@@ -289,4 +291,12 @@ input{
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+@media(max-width:1100px){
+    .table-question{
+        width: 95%;
+    }
+    .questions-answers{
+        width: 90%;
+    }
 }

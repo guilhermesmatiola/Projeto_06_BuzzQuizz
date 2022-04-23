@@ -61,6 +61,7 @@ function printQuizzes(quizzes){ //mostra a lista de quizzes no html
     console.log(quizzes.data);
     for(i = 0; i < listaQuizz.length; i++){     // ADICIONAR OS QUIZZES DO SERVER
         oQuizzes.innerHTML += ` 
+        
         <button onclick="showQuizz(${i})" class="quizzBox"> 
         <img src="${listaQuizz[i].image}" alt="thumb"> 
         <div class="gradient"></div>
