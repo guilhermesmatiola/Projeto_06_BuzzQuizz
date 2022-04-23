@@ -88,6 +88,8 @@ h2{
     color: #B9B9B9;
 }
 
+
+
 ion-icon {
     color: #EC362D;
     font-size: 31px;
@@ -141,16 +143,15 @@ strong {
     width: 1050px;
     height: 181px;
 }
-/* .gradient {
+.gradient {
     width: 340px;
     height: 180px;
     border-radius: 6px;
-    /* margin-left: 12px;
-    margin-bottom: 12px; 
+    
     background: linear-gradient(0deg, #000000,transparent);
     position: absolute;
 } 
-*/
+
 .quizzBox{
     margin-top: 50px;
     border-radius: 6px;
@@ -166,16 +167,20 @@ strong {
     cursor: pointer;
     position: relative;
 }
-.quizzBox>h3{
+.quizzBox>h4{
     max-width: 300px;
     position: absolute;
     z-index: 1;
     bottom: 6px;
     left: 24px;
-    font-size: 18px;
+    font-size: 19px;
     line-height: 25px;
     text-align: start;
     word-wrap: break-word;
+    color: #fff;
+}
+h4:hover {
+    text-shadow: 0 0 4px #fff;
 }
 .texto{
     color: #FFFFFF;
@@ -188,10 +193,7 @@ strong {
     text-align: start;
     font-size: 20px;
 }
-h4{
-    /*PASSAR CSS PARA FICAR ACIMA DA IMAGEM*/
-    font-style: normal;
-}
+
 /*-------------------FINAL DO NEWWWWWWWWWW----------------------------*/
 /*quizz questions -------ESSA SEÇÃO ESTÁ OK*/
 .create-questions-title{

@@ -3,7 +3,7 @@ let title;
 let image;
 let questions;
 let levels;
-
+homepage();
 let createdQuizz = {
 
     title: "Título do quizz",
@@ -19,7 +19,7 @@ let question={
 let answer={
     text: "Texto da resposta 1",
     image: "https://t.ctcdn.com.br/5XPASDBUosgmBv5Ptpxcd6eTJso=/512x288/smart/filters:format(webp)/i257652.jpeg",
-    isCorrectAnswer: value
+    isCorrectAnswer: true
 };
 let level ={
     title: "Título do nível 1",
@@ -63,12 +63,17 @@ function printQuizzes(quizzes){ //mostra a lista de quizzes no html
         oQuizzes.innerHTML += ` 
         <button onclick="showQuizz(${i})" class="quizzBox"> 
         <img src="${listaQuizz[i].image}" alt="thumb"> 
-         
+        <div class="gradient"></div>
         <h4 class="QuizzTitle white"> ${listaQuizz[i].title} </h4>
         </button>`
     }
 }
-
+function renderizar(titleQuestion,imageQuestion){
+    return `<div class=""gradient">
+            <img src="${imageQuestion}"/>
+            <span>${titleQuestion}</span>
+    `
+}
 
 function createQuizz() {
   //  cleanPage();
@@ -179,28 +184,52 @@ function readINFOQuizzPg2() {
     for(let i =0;i<questions;i++){
         question.title=document.getElementById(`a${i+1}1`).value;
         question.color=document.getElementById(`a${i+1}2`).value;
-     //   O TRUE NÃO ESTÁ PEGANDO
         answer.text=document.getElementById(`a${i+1}3`).value;
         answer.image=document.getElementById(`a${i+1}4`).value;
-        answer.isCorrectAnswer=true;
-   //     console.log(answer + 'errado');
+        answer.isCorrectAnswer=true;//////////////////////////////////////////
         question.answers[0]=answer;
         answer.text=document.getElementById(`a${i+1}5`).value;
         answer.image=document.getElementById(`a${i+1}6`).value;
         answer.isCorrectAnswer=false;
-      //  console.log(answer);
         question.answers[1]=answer;
         answer.text=document.getElementById(`a${i+1}7`).value;
         answer.image=document.getElementById(`a${i+1}8`).value;
         answer.isCorrectAnswer=false;
-       // question.answers[2]=answer;
+        question.answers[2]=answer;
         answer.text=document.getElementById(`a${i+1}9`).value;
         answer.image=document.getElementById(`a${i+1}10`).value;
         answer.isCorrectAnswer=false;
         question.answers[3]=answer;
 
+        if(question.title.length<20){
+            alert(`a pergunta deve ter mais de 20 caracteres, a sua está com ${question.title.length}`);
+            return;
+        }
+        if(document.getElementById(`a${i+1}3`).value && document.getElementById(`a${i+1}5`) == null){
+            alert("o texto das respostas não pode estar vazio");
+            return;
+        }
+        // if(question.color.value[0]!="#"){
+        //     alert("a cor de fundo deve começar com # e conter números e letras de 'A' até 'F' (formato hexadecimal)");
+        // }
+        if(!isValidHttpUrl(answer.image)){
+            alert("insira uma URL de imagem");
+            return;
+        }
+        
+
         createdQuizz.questions[i]=question;
     }
+    function isValidHttpUrl(string) { //verifica se a string é url
+        let url;
+        try {
+          url = new URL(string);
+        } catch (_) {
+          return false;  
+        }
+        return true;
+    }
+
     levelsCreate();
 }
 
@@ -260,7 +289,7 @@ function postedQuizz(){
     homepage();
 }
 //Codigo executado ao iniciar
-homepage();
+
 
 // function cleanPage() {
 //     const principal = document.querySelector("main");
