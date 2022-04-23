@@ -69,6 +69,7 @@ function printQuizzes(quizzes){ //mostra a lista de quizzes no html
         </button>`
     }
 }
+
 function renderizar(titleQuestion,imageQuestion){
     return `<div class=""gradient">
             <img src="${imageQuestion}"/>
