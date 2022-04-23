@@ -23,7 +23,7 @@ header{
     align-items: center;
     background: #EC362D;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    z-index: 2;
+    z-index: 1;
 }
 
 main{
@@ -127,11 +127,10 @@ strong {
 }
 /*---------NEW----------- ESSA É A PARTE DE INSERÇÃO DOS QUIZZES DO SERVIDOR, PRECISA AJUSTAR O CSS TODO AINDA;*/
 .other-quizzes{
-    margin-top: 70px;
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
-    
+    width: calc(100% - 380px);
 }
 .first-pageQuizzes{
     background-color: #FAFAFA;
@@ -171,7 +170,6 @@ strong {
 .quizzBox>h4{
     max-width: 300px;
     position: absolute;
-    z-index: 1;
     bottom: 6px;
     left: 24px;
     font-size: 19px;
@@ -186,16 +184,8 @@ h4:hover {
 .texto{
     color: #FFFFFF;
     position: absolute;
-    z-index: 1;
     font-size: 19px;
 }
-.textQuizzTitle{
-    font-weight: 700;
-    text-align: start;
-    font-size: 20px;
-    display: flex;
-}
-
 /*-------------------FINAL DO NEWWWWWWWWWW----------------------------*/
 /*quizz questions -------ESSA SEÇÃO ESTÁ OK*/
 .create-questions-title{

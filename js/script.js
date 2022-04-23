@@ -31,24 +31,25 @@ let level ={
 
 
 function homepage(){
-    document.querySelector("main").innerHTML=`
-    <div class="first-pageQuizzes">
-    <button onclick="creatQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
-        <div class="insert-quizz flex-container">
-            <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
-            <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
-        </div>
-        <div class="textQuizzTitle">
-        <h2> Todos os quizzes</h2>
-        </div>
-
-        
-    </div>    
-    <div class="other-quizzes"></div>
-    `;
+    getUserQuizzes();
     getQuizzes();
 }
-homepage(); //cria a pagina inicial ou volta pra ela quando preciso
+
+function getUserQuizzes() {
+    if (localStorage.getItem("quizzes") === null) {
+        document.querySelector("main").innerHTML=`
+            <div class="first-pageQuizzes">
+                <button onclick="creatQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
+                <div class="insert-quizz flex-container">
+                    <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
+                    <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
+                </div>  
+            </div>
+            <h2> Todos os quizzes</h2>
+            <div class="other-quizzes"></div>
+            `;
+    }
+}
 
 function getQuizzes(){ //faz get na lista de quizzes
     let promise = axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes');
@@ -56,11 +57,11 @@ function getQuizzes(){ //faz get na lista de quizzes
 }
 
 function printQuizzes(quizzes){ //mostra a lista de quizzes no html
-    let oQuizzes = document.querySelector(".other-quizzes"); // oQuizzes => otherQuizzes
+    let otherQuizzes = document.querySelector(".other-quizzes");
     listaQuizz = quizzes.data;
     console.log(quizzes.data);
-    for(i = 0; i < listaQuizz.length; i++){     // ADICIONAR OS QUIZZES DO SERVER
-        oQuizzes.innerHTML += ` 
+    for(i = 0; i < 6; i++){     // ADICIONAR OS QUIZZES DO SERVER
+        otherQuizzes.innerHTML += ` 
         
         <button onclick="showQuizz(${i})" class="quizzBox"> 
         <img src="${listaQuizz[i].image}" alt="thumb"> 
@@ -274,26 +275,3 @@ function levelsCreate(){
         <button class="create-levels-button" onclick="readINFOQuizzPg3();">Finalizar Quizz</button>
     `;
 }
-function readINFOQuizzPg3() {
-    for(let i =0;i<levels;i++){
-        level.title=document.getElementById(`a${i+1}1`).value;
-        level.minValue=document.getElementById(`a${i+1}2`).value;
-        level.image=document.getElementById(`a${i+1}3`).value;
-        level.text=document.getElementById(`a${i+1}4`).value;
-        createdQuizz.levels[i]=level;
-    }
-    console.log(createdQuizz);
-    let promise=axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',createdQuizz);
-    promise.then(postedQuizz());
-}
-function postedQuizz(){
-    alert("sucess");
-    homepage();
-}
-//Codigo executado ao iniciar
-
-
-// function cleanPage() {
-//     const principal = document.querySelector("main");
-//     principal.innerHTML = "";
-// }
