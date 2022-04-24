@@ -186,39 +186,73 @@ function questionsCreate(){
 function readINFOQuizzPg2() {
     for(let i =0;i<questions;i++){
         question.title=document.getElementById(`a${i+1}1`).value;
-        question.color=document.getElementById(`a${i+1}2`).value;
-        answer.text=document.getElementById(`a${i+1}3`).value;
-        answer.image=document.getElementById(`a${i+1}4`).value;
-        answer.isCorrectAnswer=true;//////////////////////////////////////////
-        question.answers[0]=answer;
-        answer.text=document.getElementById(`a${i+1}5`).value;
-        answer.image=document.getElementById(`a${i+1}6`).value;
-        answer.isCorrectAnswer=false;
-        question.answers[1]=answer;
-        answer.text=document.getElementById(`a${i+1}7`).value;
-        answer.image=document.getElementById(`a${i+1}8`).value;
-        answer.isCorrectAnswer=false;
-        question.answers[2]=answer;
-        answer.text=document.getElementById(`a${i+1}9`).value;
-        answer.image=document.getElementById(`a${i+1}10`).value;
-        answer.isCorrectAnswer=false;
-        question.answers[3]=answer;
-
         if(question.title.length<20){
             alert(`a pergunta deve ter mais de 20 caracteres, a sua está com ${question.title.length}`);
             return;
         }
-        if(document.getElementById(`a${i+1}3`).value && document.getElementById(`a${i+1}5`) == null){
-            alert("o texto das respostas não pode estar vazio");
-            return;
-        }
+        question.color=document.getElementById(`a${i+1}2`).value;
         // if(question.color.value[0]!="#"){
         //     alert("a cor de fundo deve começar com # e conter números e letras de 'A' até 'F' (formato hexadecimal)");
         // }
-        if(!isValidHttpUrl(answer.image)){
-            alert("insira uma URL de imagem");
+        answer.text=document.getElementById(`a${i+1}3`).value;
+        if(answer.text==""){
+            alert("Insira um texto para a resposta");
             return;
         }
+        answer.image=document.getElementById(`a${i+1}4`).value;
+        if(!isValidHttpUrl(answer.image)){
+            alert("Insira uma URL de imagem valida");
+            return;
+        }
+        answer.isCorrectAnswer=true;//////////////////////////////////////////
+        question.answers[0]=answer;
+
+        answer.text=document.getElementById(`a${i+1}5`).value;
+        if(answer.text==""){
+            alert("Insira um texto para a resposta");
+            return;
+        }
+        answer.image=document.getElementById(`a${i+1}6`).value;
+        answer.image=document.getElementById(`a${i+1}4`).value;
+        if(!isValidHttpUrl(answer.image)){
+            alert("Insira uma URL de imagem valida");
+            return;
+        }
+        answer.isCorrectAnswer=false;
+        question.answers[1]=answer;
+
+        answer.text=document.getElementById(`a${i+1}7`).value;
+        if(answer.text==""){
+            alert("Insira um texto para a resposta");
+            return;
+        }
+        answer.image=document.getElementById(`a${i+1}8`).value;
+        if(!isValidHttpUrl(answer.image)){
+            alert("Insira uma URL de imagem valida");
+            return;
+        }
+        answer.isCorrectAnswer=false;
+        question.answers[2]=answer;
+
+        answer.text=document.getElementById(`a${i+1}9`).value;
+        if(answer.text==""){
+            alert("Insira um texto para a resposta");
+            return;
+        }
+        answer.image=document.getElementById(`a${i+1}10`).value;
+        if(!isValidHttpUrl(answer.image)){
+            alert("Insira uma URL de imagem valida");
+            return;
+        }
+        answer.isCorrectAnswer=false;
+        question.answers[3]=answer;
+
+        
+        // if(document.getElementById(`a${i+1}3`).value && document.getElementById(`a${i+1}5`) == null){
+        //     alert("o texto das respostas não pode estar vazio");
+        //     return;
+        // }
+        
         
 
         createdQuizz.questions[i]=question;
