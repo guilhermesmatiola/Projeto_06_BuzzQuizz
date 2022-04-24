@@ -1,9 +1,7 @@
-let listaQuizz = [];
 let title;
 let image;
 let questions;
 let levels;
-homepage();
 let createdQuizz = {
 
     title: "Título do quizz",
@@ -27,7 +25,7 @@ let level ={
     text: "Descrição do nível 1",
     minValue: 0
 };
-
+const userQuizzListStoraged = localStorage.getItem("quizzes");
 
 
 function homepage(){
@@ -36,10 +34,9 @@ function homepage(){
 }
 
 function getUserQuizzes() {
-    if (localStorage.getItem("quizzes") === null) {
+    if (userQuizzListStoraged === null) {
         document.querySelector("main").innerHTML=`
             <div class="first-pageQuizzes">
-                <button onclick="creatQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
                 <div class="insert-quizz flex-container">
                     <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
                     <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
@@ -48,6 +45,8 @@ function getUserQuizzes() {
             <h2> Todos os quizzes</h2>
             <div class="other-quizzes"></div>
             `;
+    } else {
+        //<button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
     }
 }
 
@@ -57,13 +56,13 @@ function getQuizzes(){ //faz get na lista de quizzes
 }
 
 function printQuizzes(quizzes){ //mostra a lista de quizzes no html
-    let otherQuizzes = document.querySelector(".other-quizzes");
-    listaQuizz = quizzes.data;
+    const otherQuizzes = document.querySelector(".other-quizzes");
+    const listaQuizz = quizzes.data;
     console.log(quizzes.data);
-    for(i = 0; i < 6; i++){     // ADICIONAR OS QUIZZES DO SERVER
+    for(i = 0; i < listaQuizz.lenght; i++){     // ADICIONAR OS QUIZZES DO SERVER
         otherQuizzes.innerHTML += ` 
         
-        <button onclick="showQuizz(${i})" class="quizzBox"> 
+        <button onclick="showQuizz(${listaQuizz[i].id})" class="quizzBox"> 
         <img src="${listaQuizz[i].image}" alt="thumb"> 
         <div class="gradient"></div>
         <h4 class="QuizzTitle white"> ${listaQuizz[i].title} </h4>
@@ -79,11 +78,7 @@ function renderizar(titleQuestion,imageQuestion){
 }
 
 function createQuizz() {
-  //  cleanPage();
-   // displayFirstCreationPage();
-
     document.querySelector("main").innerHTML=`
-    
     <strong>Começando pelo começo</strong>
         <div class="quizz-creation flex-container">
             <input id="i1" type="text" minlength="20" maxlength="65" required placeholder="Título do seu quizz">
@@ -309,3 +304,67 @@ function levelsCreate(){
         <button class="create-levels-button" onclick="readINFOQuizzPg3();">Finalizar Quizz</button>
     `;
 }
+
+function readINFOQuizzPg3() {
+    let levelzero=false;
+    for(let i =0;i<levels;i++){
+        //
+        level.title=document.getElementById(`a${i+1}1`).value;
+        if(level.title.length<10){
+            alert(`O titulo do nível deve ter mais de 10 caracteres, o seu está com ${question.title.length}`);
+            return;
+        }
+        //
+        level.minValue=document.getElementById(`a${i+1}2`).value;
+        if(level.minValue=="0"){
+            levelzero=true;
+        }
+        if(!(level.minValue>=0 || level.minValue<=100)){
+            alert('Os níveis vão de 0 a 100. Insira um nessa faixa')
+        }
+        ///
+        level.image=document.getElementById(`a${i+1}3`).value;
+        if(!isValidHttpUrl(level.image)){
+            alert("Insira um URL de imagem válida");
+        }
+        function isValidHttpUrl(string) { //verifica se a string é url
+            let url;
+            try {
+              url = new URL(string);
+            } catch (_) {
+              return false;  
+            }
+            return true;
+        }
+        ////
+        level.text=document.getElementById(`a${i+1}4`).value;
+        if(level.text.length<30){
+            alert("Escolha uma descrição com mais de 30 caracteres");
+            return;
+        }
+        createdQuizz.levels[i]=level;
+    }
+    if(levelzero==false){
+        alert("Pelo menos um dos níveis deve ter o valor 0");
+        createQuizzPg3();
+    }
+    console.log(createdQuizz);
+    let promise=axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',createdQuizz);
+    promise.then(saveQuizzes);
+}
+
+function saveQuizzes(quizz) {
+    if (userQuizzListStoraged === undefined) {
+        const userQuizz = [];
+        userQuizz.push(quizz.data.id);
+        const userQuizzSerialized = JSON.stringify(userQuizz);
+        localStorage.setItem("quizzes", userQuizzSerialized);
+    } else {
+        const userQuizzListDeserialized = JSON.parse(userQuizzListStoraged);
+        userQuizzListDeserialized.push(quizz.data.id);
+        const userQuizzListSerialized = JSON.stringify(userQuizzListDeserialized);
+        localStorage.setItem("quizzes", userQuizzListSerialized);
+    }   
+}
+
+homepage();
