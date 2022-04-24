@@ -31,24 +31,25 @@ let level ={
 
 
 function homepage(){
-    document.querySelector("main").innerHTML=`
-    <div class="first-pageQuizzes">
-    <button onclick="creatQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
-        <div class="insert-quizz flex-container">
-            <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
-            <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
-        </div>
-        <div class="textQuizzTitle">
-        <h2> Todos os quizzes</h2>
-        </div>
-
-        
-    </div>    
-    <div class="other-quizzes"></div>
-    `;
+    getUserQuizzes();
     getQuizzes();
 }
-homepage(); //cria a pagina inicial ou volta pra ela quando preciso
+
+function getUserQuizzes() {
+    if (localStorage.getItem("quizzes") === null) {
+        document.querySelector("main").innerHTML=`
+            <div class="first-pageQuizzes">
+                <button onclick="creatQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
+                <div class="insert-quizz flex-container">
+                    <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
+                    <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
+                </div>  
+            </div>
+            <h2> Todos os quizzes</h2>
+            <div class="other-quizzes"></div>
+            `;
+    }
+}
 
 function getQuizzes(){ //faz get na lista de quizzes
     let promise = axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes');
@@ -56,11 +57,11 @@ function getQuizzes(){ //faz get na lista de quizzes
 }
 
 function printQuizzes(quizzes){ //mostra a lista de quizzes no html
-    let oQuizzes = document.querySelector(".other-quizzes"); // oQuizzes => otherQuizzes
+    let otherQuizzes = document.querySelector(".other-quizzes");
     listaQuizz = quizzes.data;
     console.log(quizzes.data);
-    for(i = 0; i < listaQuizz.length; i++){     // ADICIONAR OS QUIZZES DO SERVER
-        oQuizzes.innerHTML += ` 
+    for(i = 0; i < 6; i++){     // ADICIONAR OS QUIZZES DO SERVER
+        otherQuizzes.innerHTML += ` 
         
         <button onclick="showQuizz(${i})" class="quizzBox"> 
         <img src="${listaQuizz[i].image}" alt="thumb"> 
@@ -69,6 +70,7 @@ function printQuizzes(quizzes){ //mostra a lista de quizzes no html
         </button>`
     }
 }
+
 function renderizar(titleQuestion,imageQuestion){
     return `<div class=""gradient">
             <img src="${imageQuestion}"/>
@@ -210,10 +212,9 @@ function readINFOQuizzPg2() {
             alert("o texto das respostas não pode estar vazio");
             return;
         }
-        if(question.color[0]!="#" ){
-            alert("a cor de fundo deve começar com # e conter números e letras de 'A' até 'F' (formato hexadecimal)");
-            return;    
-        }
+        // if(question.color.value[0]!="#"){
+        //     alert("a cor de fundo deve começar com # e conter números e letras de 'A' até 'F' (formato hexadecimal)");
+        // }
         if(!isValidHttpUrl(answer.image)){
             alert("insira uma URL de imagem");
             return;
@@ -274,54 +275,3 @@ function levelsCreate(){
         <button class="create-levels-button" onclick="readINFOQuizzPg3();">Finalizar Quizz</button>
     `;
 }
-function readINFOQuizzPg3() {
-    for(let i =0;i<levels;i++){
-        level.title=document.getElementById(`a${i+1}1`).value;
-        if(level.title.length<10){
-            alert(`O titulo do nivel deve ter mais de 10 caracteres, a sua está com ${question.title.length}`);
-            return;
-        }
-        level.minValue=document.getElementById(`a${i+1}2`).value;
-        if((level.minValue>=0 || level.minValue<-100)==false){
-            alert(`insira um valor para o level entre 0 e 100`);
-            return;
-        }
-        level.image=document.getElementById(`a${i+1}3`).value;
-        if(!isValidHttpUrl(level.image)){
-            alert("insira uma URL de imagem");
-            return;
-        }
-        function isValidHttpUrl(string) { //verifica se a string é url
-            let url;
-            try {
-              url = new URL(string);
-            } catch (_) {
-              return false;  
-            }
-            return true;
-        }
-        level.text=document.getElementById(`a${i+1}4`).value;
-        if(level.title.length<30){
-            alert(`a descrição do nivel deve ter mais de 30 caracteres, a sua está com ${question.title.length}`);
-            return;
-        }
-        createdQuizz.levels[i]=level;
-
-        
-        
-    }
-    console.log(createdQuizz);
-    let promise=axios.post('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes',createdQuizz);
-    promise.then(postedQuizz());
-}
-function postedQuizz(){
-    alert("sucess");
-    homepage();
-}
-//Codigo executado ao iniciar
-
-
-// function cleanPage() {
-//     const principal = document.querySelector("main");
-//     principal.innerHTML = "";
-// }
