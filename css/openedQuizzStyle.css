@@ -4,12 +4,10 @@ h3 {
 }
 
 .quizz-title {
-    width: 100vw;
+    width: 100%;
     height: 227px;
     margin-top: -77px;
     margin-bottom: 40px;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
 .answers-box {

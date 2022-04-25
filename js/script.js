@@ -59,14 +59,13 @@ function getQuizzes(){ //faz get na lista de quizzes
 function printQuizzes(quizzes){ //mostra a lista de quizzes no html
     const otherQuizzes = document.querySelector(".other-quizzes");
     const listaQuizz = quizzes.data;
-    console.log(listaQuizz);
     for (let i = 0; i < listaQuizz.length; i++) {
         otherQuizzes.innerHTML += ` 
         
         <button onclick="openQuizz(${listaQuizz[i].id})" class="quizzBox"> 
-        <img src="${listaQuizz[i].image}" alt="thumb"> 
-        <div class="gradient"></div>
-        <h4 class="QuizzTitle white"> ${listaQuizz[i].title} </h4>
+            <img src="${listaQuizz[i].image}" alt="thumb"> 
+            <div class="gradient"></div>
+            <h4 class="QuizzTitle white"> ${listaQuizz[i].title} </h4>
         </button>`;
     }
 }
@@ -370,43 +369,38 @@ function saveQuizzes(quizz) {
 function openQuizz(quizzId) {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzId}`);
     promise.then((requestedQuizz) => {
+        console.log(requestedQuizz)
         mainDiv.innerHTML = `
-        <div class="quizz-title flex-container" style="background-image: url(${requestedQuizz.image});">
-            <h3>Título do quizz</h3>
+        <div class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: 100%;">
+            <div></div>
+            <h3>${requestedQuizz.data.title}</h3>
         </div>
         <ul>
         </ul>`
         const list = document.querySelector("ul");
         requestedQuizz.data.questions.map((question) => {
-            console.log(question)
-            randomizeAnswers(question);
-            list.innerHTML = `<div class="answers-box flex-container">
-            <div class="colored-question-box flex-container" style="background-color: ${question.color};"><p>${question.title}</p></div>
-            <div class="answers flex-container">
-                    <div class="answers-options">
-                        <img src="${question.answers[0].image}">
-                        <p>${question.answers[0].text}</p>
-                    </div>
-                    <div class="answers-options">
-                        <img src="${question.answers[1].image}">
-                        <p>${question.answers[1].text}</p>
-                    </div>
-                    <div class="answers-options">
-                        <img src="${question.answers[2].image}">
-                        <p>${question.answers[2].text}</p>
-                    </div>
-                    <div class="answers-options">
-                        <img src="${question.answers[3].image}">
-                        <p>${question.answers[3].text}</p>
-                    </div>
+            list.innerHTML += `<div class="answers-box flex-container">
+            <div class="colored-question-box flex-container" style="background-color: ${question.color};">
+                <p>${question.title}</p>
+            </div>
+                <div class="answers flex-container">
                 </div>
             </div>`
+            randomizeAnswers(question.answers);
+            const answerOptions = list.lastElementChild.lastElementChild;
+            question.answers.map((answer) => {
+                answerOptions.innerHTML += `
+                <div class="answers-options">
+                    <img src="${answer.image}">
+                    <p>${answer.text}</p>
+                </div>`;
+            });
         });
     });
 }
 
-function randomizeAnswers(questionObject) {
-    
+function randomizeAnswers(answerArray) {
+    answerArray.sort(() => Math.random() - 0.5);
 }
 
 homepage();
