@@ -277,7 +277,20 @@ input{
     align-items: center;
     flex-direction: column;
 }
-
+/*teste no create quizz*/
+.row{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:  center;
+}
+.ion-icon-black{
+    color: black;
+    display: block;
+}
+.pointerEventsNone{
+    pointer-events: none;
+    }
 @media(max-width:1100px){
     .table-question{
         width: 95%;
