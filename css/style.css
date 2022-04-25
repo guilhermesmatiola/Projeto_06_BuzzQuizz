@@ -1,11 +1,11 @@
 * {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
     box-sizing: border-box;
 }
 
 body {
     background-color: #FAFAFA;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
 }
 
 button {
@@ -61,15 +61,12 @@ main{
 
 /* texts */
 h1{
-    font-family: 'Roboto', sans-serif;
     font-weight: 700;
     font-size: 37px;
     line-height: 43px;
     color: #FFFFFF;
 }
 h2{
-    font-family: 'Roboto';
-
     font-weight: 700;
     font-size: 20px;
     line-height: 23px;
@@ -198,10 +195,9 @@ h4:hover {
     width: 600px;
     display: flex;
     flex-direction: column;
-    padding: 20px;
-
-    
+    padding: 20px; 
 }
+
 input{
     font-style: italic;
     padding-left: 23px;
@@ -211,6 +207,7 @@ input{
     box-sizing: border-box;
     border-radius: 5px;
 }
+
 .first-question{
     background: #FFFFFF;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
@@ -223,6 +220,7 @@ input{
     
     margin-bottom: 24px;
 }
+
 .next-question{
     display: flex;
     align-items: center;
@@ -279,6 +277,7 @@ input{
     align-items: center;
     flex-direction: column;
 }
+
 @media(max-width:1100px){
     .table-question{
         width: 95%;

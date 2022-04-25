@@ -26,6 +26,7 @@ let level ={
     minValue: 0
 };
 const userQuizzListStoraged = localStorage.getItem("quizzes");
+const mainDiv = document.querySelector("main");
 
 
 function homepage(){
@@ -35,7 +36,7 @@ function homepage(){
 
 function getUserQuizzes() {
     if (userQuizzListStoraged === null) {
-        document.querySelector("main").innerHTML=`
+        mainDiv.innerHTML =`
             <div class="first-pageQuizzes">
                 <div class="insert-quizz flex-container">
                     <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
@@ -45,9 +46,9 @@ function getUserQuizzes() {
             <h2> Todos os quizzes</h2>
             <div class="other-quizzes"></div>
             `;
-    } else {
-        //<button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
-    }
+    } // else {
+    //     //<button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
+    // }
 }
 
 function getQuizzes(){ //faz get na lista de quizzes
@@ -58,15 +59,15 @@ function getQuizzes(){ //faz get na lista de quizzes
 function printQuizzes(quizzes){ //mostra a lista de quizzes no html
     const otherQuizzes = document.querySelector(".other-quizzes");
     const listaQuizz = quizzes.data;
-    console.log(quizzes.data);
-    for(i = 0; i < listaQuizz.lenght; i++){     // ADICIONAR OS QUIZZES DO SERVER
+    console.log(listaQuizz);
+    for (let i = 0; i < listaQuizz.length; i++) {
         otherQuizzes.innerHTML += ` 
         
-        <button onclick="showQuizz(${listaQuizz[i].id})" class="quizzBox"> 
+        <button onclick="openQuizz(${listaQuizz[i].id})" class="quizzBox"> 
         <img src="${listaQuizz[i].image}" alt="thumb"> 
         <div class="gradient"></div>
         <h4 class="QuizzTitle white"> ${listaQuizz[i].title} </h4>
-        </button>`
+        </button>`;
     }
 }
 
@@ -78,7 +79,7 @@ function renderizar(titleQuestion,imageQuestion){
 }
 
 function createQuizz() {
-    document.querySelector("main").innerHTML=`
+    mainDiv.innerHTML=`
     <strong>Começando pelo começo</strong>
         <div class="quizz-creation flex-container">
             <input id="i1" type="text" minlength="20" maxlength="65" required placeholder="Título do seu quizz">
@@ -132,14 +133,14 @@ function isValidHttpUrl(string) { //verifica se a string é url
 }
 
 function questionsCreate(){
-    document.querySelector("main").innerHTML=`
+    mainDiv.innerHTML=`
     <div class="quizz-questions">
             <div class="create-questions-title"><strong>Crie suas perguntas</strong></div> 
      </div>
     `;
 
     for(let i=0;i<questions;i++){
-        document.querySelector("main").innerHTML+=
+        mainDiv.innerHTML+=
         `
         <div class="quizz-questions">
                <div class="question-box">
@@ -174,7 +175,7 @@ function questionsCreate(){
        `
     }
     
-    document.querySelector("main").innerHTML+=`
+    mainDiv.innerHTML+=`
     <button class="create-levels-button" onclick="readINFOQuizzPg2();">Prosseguir pra criar níveis</button>                                
     `;                                          //levelsCreate();
 }
@@ -266,14 +267,14 @@ function readINFOQuizzPg2() {
 }
 
 function levelsCreate(){
-    document.querySelector("main").innerHTML=`
+    mainDiv.innerHTML=`
     
     <div class="quizz-levels">
             <div class="create-questions-title"><strong>Agora, decida os níveis</strong></div> 
     </div>
     `
     for(let i=0;i<levels;i++){
-        document.querySelector("main").innerHTML+=
+        mainDiv.innerHTML+=
         `
             <div class="question-box">
 
@@ -300,7 +301,7 @@ function levelsCreate(){
     }
 
     
-    document.querySelector("main").innerHTML+=`
+    mainDiv.innerHTML+=`
         <button class="create-levels-button" onclick="readINFOQuizzPg3();">Finalizar Quizz</button>
     `;
 }
@@ -336,7 +337,6 @@ function readINFOQuizzPg3() {
             }
             return true;
         }
-        ////
         level.text=document.getElementById(`a${i+1}4`).value;
         if(level.text.length<30){
             alert("Escolha uma descrição com mais de 30 caracteres");
@@ -354,7 +354,7 @@ function readINFOQuizzPg3() {
 }
 
 function saveQuizzes(quizz) {
-    if (userQuizzListStoraged === undefined) {
+    if (userQuizzListStoraged === null) {
         const userQuizz = [];
         userQuizz.push(quizz.data.id);
         const userQuizzSerialized = JSON.stringify(userQuizz);
@@ -365,6 +365,48 @@ function saveQuizzes(quizz) {
         const userQuizzListSerialized = JSON.stringify(userQuizzListDeserialized);
         localStorage.setItem("quizzes", userQuizzListSerialized);
     }   
+}
+
+function openQuizz(quizzId) {
+    const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzId}`);
+    promise.then((requestedQuizz) => {
+        mainDiv.innerHTML = `
+        <div class="quizz-title flex-container" style="background-image: url(${requestedQuizz.image});">
+            <h3>Título do quizz</h3>
+        </div>
+        <ul>
+        </ul>`
+        const list = document.querySelector("ul");
+        requestedQuizz.data.questions.map((question) => {
+            console.log(question)
+            randomizeAnswers(question);
+            list.innerHTML = `<div class="answers-box flex-container">
+            <div class="colored-question-box flex-container" style="background-color: ${question.color};"><p>${question.title}</p></div>
+            <div class="answers flex-container">
+                    <div class="answers-options">
+                        <img src="${question.answers[0].image}">
+                        <p>${question.answers[0].text}</p>
+                    </div>
+                    <div class="answers-options">
+                        <img src="${question.answers[1].image}">
+                        <p>${question.answers[1].text}</p>
+                    </div>
+                    <div class="answers-options">
+                        <img src="${question.answers[2].image}">
+                        <p>${question.answers[2].text}</p>
+                    </div>
+                    <div class="answers-options">
+                        <img src="${question.answers[3].image}">
+                        <p>${question.answers[3].text}</p>
+                    </div>
+                </div>
+            </div>`
+        });
+    });
+}
+
+function randomizeAnswers(questionObject) {
+    
 }
 
 homepage();
