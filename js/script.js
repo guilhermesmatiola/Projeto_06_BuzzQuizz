@@ -170,7 +170,7 @@ function questionsCreate(){
    
                        <div class="table-question">
                            <input id="a${i+1}1" class="questions-answers" type="text" placeholder="Texto da pergunta">
-                           <input id="a${i+1}2" class="questions-answers" type="text" placeholder="Cor de fundo da pergunta">
+                           <input id="a${i+1}2" onclick="isAcolor();" class="questions-answers" type="text" placeholder="Cor de fundo da pergunta">
                            <h2>Resposta correta</h2>
                            <input id="a${i+1}3" class="questions-answers" type="text" placeholder="Resposta correta">
                            <input id="a${i+1}4" class="questions-answers" type="url" placeholder="URL de imagem">
@@ -218,6 +218,11 @@ function questionsCreate(){
     <button class="create-levels-button" onclick="readINFOQuizzPg2();">Prosseguir pra criar níveis</button>                                
     `;                                          //levelsCreate();
 }
+function isAcolor(){
+    alert("Insira uma cor no formato '#'+ 6 caracteres de A a F e ou 0 a 9");
+    return;
+}
+
 function showQuestion(i,element){
     element.classList.add("pointerEventsNone");
     element.style.display="none";
