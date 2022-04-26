@@ -31,6 +31,7 @@ const scrollInterval = 2000;
 let openedQuizz;
 let rightAnswersCounter = 0;
 let levelIndex = 0;
+let questionsAnswered = 0;
 
 
 function homepage(){
@@ -490,6 +491,7 @@ function checkAnswer(element) {
         element.querySelector("p").classList.remove("wrong-answers");
         element.querySelector("p").classList.add("right-answers");
         rightAnswersCounter++;
+        questionsAnswered++;
     } else {
         const allAnswers = element.parentNode.querySelectorAll("div");
         allAnswers.forEach((answers) => {
@@ -500,11 +502,13 @@ function checkAnswer(element) {
         element.classList.remove("opacity");
         element.parentNode.querySelector(".true").querySelector("p").classList.remove("wrong-answers");
         element.parentNode.querySelector(".true").querySelector("p").classList.add("right-answers");
+        questionsAnswered++;
     }
     const nextQuestion = element.parentNode.parentNode.nextSibling;
-    if(nextQuestion !== null) { //validação esta com bug
+    const numberOfQuestions = openedQuizz.data.questions.length;
+    if(nextQuestion !== null && questionsAnswered !== numberOfQuestions) {
         setTimeout(scrollToNextQuestion, scrollInterval, nextQuestion);
-    } else {
+    } else if (questionsAnswered === numberOfQuestions) {
         let percent = checkResults();
         mainDiv.innerHTML += `<div class="result-box flex-container">
         <div class="colored-result-box flex-container">
@@ -541,6 +545,7 @@ function resetQuizz() {
         element.setAttribute("onclick", "checkAnswer(this);");
     });
     rightAnswersCounter = 0;
+    questionsAnswered = 0;
 }
 
 function checkResults() {

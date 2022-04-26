@@ -83,6 +83,7 @@ h3 {
     height: 99px;
     margin-bottom: 18px;
     background-color: #EC362D;
+    word-break: break-all;
 }
 
 .colored-result-box > p {
