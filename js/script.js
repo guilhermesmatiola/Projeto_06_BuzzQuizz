@@ -62,6 +62,17 @@ function getUserQuizzes() {
             <h2> Todos os quizzes</h2>
             <div class="other-quizzes"></div>
             `;
+        userQuizzListStoraged.forEach((quizzId) => {
+            const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzId}`);
+            promise.then((userQuizz) => {
+                const userQuizzes = document.querySelector("user-quizzes");
+                userQuizzes.innerHTML += `<button onclick="openQuizz(${userQuizz.id})" class="quizzBox"> 
+                <img src="${userQuizz.image}" alt="thumb"> 
+                <div class="gradient"></div>
+                <h4 class="QuizzTitle white"> ${userQuizz.title} </h4>
+            </button>`;
+            });
+        });
      }
 }
 
@@ -537,7 +548,7 @@ function checkResults() {
     const porcentage = Math.floor((rightAnswersCounter/questions) * 100);
     const numberOfLevels = openedQuizz.data.levels.length;
     for(let i = 0; i < numberOfLevels; i++) {
-        if (porcentage < openedQuizz.data.levels[i].minValue) {
+        if (porcentage >= openedQuizz.data.levels[i].minValue) {
             levelIndex = i;
         } else {
             levelIndex = i - 1
