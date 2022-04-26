@@ -444,9 +444,9 @@ function openQuizz(quizzId) {
             const answerOptions = list.lastElementChild.lastElementChild;
             question.answers.map((answer) => {
                 answerOptions.innerHTML += `
-                <div class="answers-options">
+                <div class="answers-options" onclick="checkAnswer(this);">
                     <img src="${answer.image}">
-                    <p>${answer.text}</p>
+                    <p class="normal-answer">${answer.text}</p>
                 </div>`;
             });
         });
@@ -455,6 +455,18 @@ function openQuizz(quizzId) {
 
 function randomizeAnswers(answerArray) {
     answerArray.sort(() => Math.random() - 0.5);
+}
+
+function checkAnswer(element) {
+    const allAnswers = element.parentNode.querySelectorAll("div");
+    allAnswers.forEach((answerBox) => {
+        answerBox.classList.add("opacity");
+        answerBox.removeAttribute("onclick");
+        answerBox.querySelector("p").classList.add("wrong-answers");
+    });
+    element.classList.remove("opacity");
+    element.querySelector("p").classList.remove("wrong-answers");
+    element.querySelector("p").classList.add("right-answers");
 }
 
 homepage();
