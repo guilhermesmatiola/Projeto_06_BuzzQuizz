@@ -67,3 +67,66 @@ h3 {
 .right-answers {
     color: #009C22;
 }
+
+.result-box {
+    width: 759px;
+    height: 430px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.05);
+    padding: 18px;
+    margin-bottom: 57px;
+}
+
+.colored-result-box {
+    width: 727px;
+    height: 99px;
+    margin-bottom: 18px;
+}
+
+.colored-result-box > p {
+    font-size: 23px;
+    font-weight: 700;
+    color: #FFFFFF;
+}
+
+.results {
+    width: 727px;
+    flex-direction: initial;
+    justify-content: space-between;
+}
+
+.results img {
+    width: 364px;
+    height: 273px;
+}
+
+.text {
+    width: 328px;
+    height: 273px;
+}
+
+.text p {
+    font-size: 19px;
+    font-weight: 700;
+    color: #484848;
+}
+
+.buttons {
+    height: 100px;
+    justify-content: space-between;
+    margin-bottom: 50px;
+}
+
+.buttons button:first-child {
+    width: 260px;
+    height: 52px;
+    border-radius: 15px;
+    background: #EC362D;
+    font-size: 21px;
+    color: #FFF5F4;
+}
+
+.buttons button:last-child {
+    color: #818181;
+    font-size: 21px;
+}

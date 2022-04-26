@@ -27,11 +27,12 @@ let level ={
 };
 const userQuizzListStoraged = localStorage.getItem("quizzes");
 const mainDiv = document.querySelector("main");
+let openedQuizz;
 
 
 function homepage(){
    // limpar();
-   document.querySelector(".quizz-title-box").innerHTML ="";
+    document.querySelector(".quizz-title-box").innerHTML ="";
     getUserQuizzes();
     getQuizzes();
 }
@@ -431,7 +432,8 @@ function saveQuizzes(quizz) {
 function openQuizz(quizzId) {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzId}`);
     promise.then((requestedQuizz) => {
-        document.querySelector(".quizz-title-box").innerHTML = `<div id="selecionar" class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: cover;">
+        openedQuizz = requestedQuizz;
+        document.querySelector(".quizz-title-box").innerHTML = `<div class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: cover;">
         <div></div>
         <h3>${requestedQuizz.data.title}</h3>
     </div>`
@@ -476,13 +478,44 @@ function checkAnswer(element) {
     element.querySelector("p").classList.remove("wrong-answers");
     element.querySelector("p").classList.add("right-answers");
     const nextQuestion = element.parentNode.parentNode.nextSibling;
-    if(nextQuestion !== null)
-        setTimeout(scrollToNextQuestion, 2000, nextQuestion)
+    if(nextQuestion !== null) {
+        setTimeout(scrollToNextQuestion, 2000, nextQuestion);
+    } else {
+        mainDiv.innerHTML += `<div class="result-box flex-container">
+        <div class="colored-result-box flex-container" style="background-color: blue;">
+            <p>${question.title}</p>
+        </div>
+        <div class="results flex-container">
+            <img src="" alt="thumb">
+            <div class="text">
+                <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>
+            </div>
+        </div>
+    </div>
+    <div class="buttons flex-container">
+        <button onclick="resetQuizz();">Reiniciar Quizz</button>
+        <button onclick="homepage();">Voltar pra home</button>
+    </div>`;
+        const result = document.querySelector(".result-box");
+        setTimeout(scrollToNextQuestion, 2000, result);
+    }
 }
 
 function scrollToNextQuestion(element) {
     element.scrollIntoView({ behavior: "smooth"});
 }
 
-homepage();
+function resetQuizz() {
+    mainDiv.removeChild(document.querySelector(".result-box"));
+    mainDiv.removeChild(document.querySelector(".buttons"));
+    scrollToNextQuestion(document.querySelector(".quizz-title-box"));
+    document.querySelectorAll(".answers-options").forEach((element) => {
+        element.classList.remove("opacity");
+        element.children[1].classList.remove("wrong-answers");
+        element.children[1].classList.remove("right-answers");
+        element.setAttribute("onclick", "checkAnswer(this);");
+    });
+}
+
+//homepage();
 
