@@ -28,7 +28,7 @@ let level ={
 const userQuizzListStoraged = localStorage.getItem("quizzes");
 const mainDiv = document.querySelector("main");
 let openedQuizz;
-let rightAnswersCounter;
+let rightAnswersCounter = 0;
 
 
 function homepage(){
@@ -489,7 +489,7 @@ function checkAnswer(element) {
         element.classList.remove("opacity");
         element.querySelector("p").classList.remove("wrong-answers");
         element.querySelector("p").classList.add("right-answers");
-        rightAnswersCounter ++;
+        rightAnswersCounter++;
     } else {
         const allAnswers = element.parentNode.querySelectorAll("div");
         allAnswers.forEach((answers) => {
@@ -545,10 +545,8 @@ function resetQuizz() {
 
 function checkResults() {
     const questions = openedQuizz.data.questions.length;
-    console.log(rightAnswersCounter)
-    console.log(questions)
-    const porcentage = (rightAnswersCounter/questions) * 100;
-    console.log(porcentage)
+    const porcentage = Math.floor((rightAnswersCounter/questions) * 100);
+    
 }
 
 homepage();
