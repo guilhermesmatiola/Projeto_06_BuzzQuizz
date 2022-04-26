@@ -67,7 +67,7 @@ function getUserQuizzes() {
             <h2> Todos os quizzes</h2>
             <div class="other-quizzes"></div>
             `;
-        <button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
+        // <button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
      }
 }
 
