@@ -28,6 +28,7 @@ let level ={
 const userQuizzListStoraged = localStorage.getItem("quizzes");
 const mainDiv = document.querySelector("main");
 let openedQuizz;
+let rightAnswersCounter;
 
 
 function homepage(){
@@ -55,9 +56,19 @@ function getUserQuizzes() {
             <h2> Todos os quizzes</h2>
             <div class="other-quizzes"></div>
             `;
-    } // else {
-    //     //<button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
-    // }
+    } else {
+        mainDiv.innerHTML =`
+            <div class="first-pageQuizzes">
+                <div class="insert-quizz flex-container">
+                    <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
+                    <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
+                </div>  
+            </div>
+            <h2> Todos os quizzes</h2>
+            <div class="other-quizzes"></div>
+            `;
+        <button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
+     }
 }
 
 function getQuizzes(){ //faz get na lista de quizzes
@@ -478,6 +489,7 @@ function checkAnswer(element) {
         element.classList.remove("opacity");
         element.querySelector("p").classList.remove("wrong-answers");
         element.querySelector("p").classList.add("right-answers");
+        rightAnswersCounter ++;
     } else {
         const allAnswers = element.parentNode.querySelectorAll("div");
         allAnswers.forEach((answers) => {
@@ -528,14 +540,14 @@ function resetQuizz() {
         element.children[1].classList.remove("right-answers");
         element.setAttribute("onclick", "checkAnswer(this);");
     });
+    rightAnswersCounter = 0;
 }
 
 function checkResults() {
-    const rightAnswers = document.querySelectorAll(".right-answers").length;
     const questions = openedQuizz.data.questions.length;
-    console.log(rightAnswers)
+    console.log(rightAnswersCounter)
     console.log(questions)
-    const porcentage = (rightAnswers/questions) * 100;
+    const porcentage = (rightAnswersCounter/questions) * 100;
     console.log(porcentage)
 }
 
