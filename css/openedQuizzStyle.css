@@ -6,8 +6,8 @@ h3 {
 .quizz-title {
     width: 100%;
     height: 227px;
-    margin-top: -77px;
-    margin-bottom: 40px;
+    margin-top: 69px;
+    margin-bottom: -100px;
 }
 
 .answers-box {
@@ -32,7 +32,7 @@ h3 {
 }
 
 .answers {
-    flex-direction: initial;
+    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
 }

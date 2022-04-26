@@ -398,12 +398,12 @@ function saveQuizzes(quizz) {
 function openQuizz(quizzId) {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzId}`);
     promise.then((requestedQuizz) => {
-        console.log(requestedQuizz)
+        document.querySelector(".quizz-title-box").innerHTML = `<div class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: 100% 100%;">
+        <div></div>
+        <h3>${requestedQuizz.data.title}</h3>
+    </div>`
+        
         mainDiv.innerHTML = `
-        <div class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: 100%;">
-            <div></div>
-            <h3>${requestedQuizz.data.title}</h3>
-        </div>
         <ul>
         </ul>`
         const list = document.querySelector("ul");
