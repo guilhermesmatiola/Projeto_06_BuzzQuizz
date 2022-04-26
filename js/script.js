@@ -423,7 +423,7 @@ function saveQuizzes(quizz) {
 function openQuizz(quizzId) {
     const promise = axios.get(`https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes/${quizzId}`);
     promise.then((requestedQuizz) => {
-        document.querySelector(".quizz-title-box").innerHTML = `<div class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: 100% 100%;">
+        document.querySelector(".quizz-title-box").innerHTML = `<div class="quizz-title flex-container" style="background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(${requestedQuizz.data.image}); background-repeat: no-repeat; background-size: cover;">
         <div></div>
         <h3>${requestedQuizz.data.title}</h3>
     </div>`
