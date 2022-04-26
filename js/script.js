@@ -172,11 +172,22 @@ function questionsCreate(){
        `
         }else{
             mainDiv.innerHTML+=`
-            <div id="Pergunta ${i+1}" class="question-box">
-                <div class="row">
-                    <h2>Pergunta ${i+1}</h2>
-                    <ion-icon class="ion-icon-black" onclick="showQuestion(${i},this)" name="create-outline"></ion-icon>
+
+            <div class="quizz-questions">
+
+                <div class="question-box">
+
+                    <div id="Pergunta ${i+1}" class="question-box">
+                        <div class="first-question">
+                            <div class="row">
+                                <h2>Pergunta ${i+1}</h2>
+                                <ion-icon class="ion-icon-black" onclick="showQuestion(${i},this)" name="create-outline"></ion-icon>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
             `;
 
@@ -192,18 +203,32 @@ function showQuestion(i,element){
     element.classList.add("pointerEventsNone");
     element.style.display="none";
     document.getElementById(`Pergunta ${i+1}`).innerHTML+=`
-            <input id="a${i+1}1" type="text" placeholder="Texto da pergunta" minlength="20">
-            <input id="a${i+1}2" type="text" placeholder="Cor de fundo da pergunta">
-            <h2>Resposta correta</h2>
-            <input id="a${i+1}3" type="text" placeholder="Resposta correta">
-            <input id="a${i+1}4" type="url" placeholder="URL de imagem">
-            <h2>Respostas incorretas</h2>
-            <input id="a${i+1}5" type="text" placeholder="Resposta incorreta 1">
-            <input id="a${i+1}6" type="url" placeholder="URL de imagem 1">
-            <input id="a${i+1}7" type="text" placeholder="Resposta incorreta 2">
-            <input id="a${i+1}8" type="url" placeholder="URL de imagem 2">
-            <input id="a${i+1}9" type="text" placeholder="Resposta incorreta 3">
-            <input id="a${i+1}10" type="url" placeholder="URL de imagem 3">
+
+    <div class="quizz-questions">
+               <div class="question-box">
+   
+                   <div class="first-question">
+                    
+   
+                       <div class="table-question">
+                           <input id="a${i+1}1" class="questions-answers" type="text" placeholder="Texto da pergunta">
+                           <input id="a${i+1}2" class="questions-answers" type="text" placeholder="Cor de fundo da pergunta">
+                           <h2>Resposta correta</h2>
+                           <input id="a${i+1}3" class="questions-answers" type="text" placeholder="Resposta correta">
+                           <input id="a${i+1}4" class="questions-answers" type="url" placeholder="URL de imagem">
+                           <h2>Respostas incorretas</h2>
+                           <input id="a${i+1}5" class="questions-answers" type="text" placeholder="Resposta incorreta 1">
+                           <input id="a${i+1}6" class="questions-answers" type="url" placeholder="URL de imagem 1">
+                           <input id="a${i+1}7" class="questions-answers" type="text" placeholder="Resposta incorreta 2">
+                           <input id="a${i+1}8" class="questions-answers" type="url" placeholder="URL de imagem 2">
+                           <input id="a${i+1}9" class="questions-answers" type="text" placeholder="Resposta incorreta 3">
+                           <input id="a${i+1}10" class="questions-answers" type="url" placeholder="URL de imagem 3">
+                       </div>
+                       
+                   </div>
+     
+               </div>
+           </div>
     `;
 }
 
