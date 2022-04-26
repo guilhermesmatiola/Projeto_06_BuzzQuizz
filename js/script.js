@@ -467,6 +467,13 @@ function checkAnswer(element) {
     element.classList.remove("opacity");
     element.querySelector("p").classList.remove("wrong-answers");
     element.querySelector("p").classList.add("right-answers");
+    const nextQuestion = element.parentNode.parentNode.nextSibling;
+    if(nextQuestion !== null)
+        setTimeout(scrollToNextQuestion, 2000, nextQuestion)
+}
+
+function scrollToNextQuestion(element) {
+    element.scrollIntoView({ behavior: "smooth"});
 }
 
 homepage();
