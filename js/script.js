@@ -454,7 +454,7 @@ function openQuizz(quizzId) {
             const answerOptions = list.lastElementChild.lastElementChild;
             question.answers.map((answer) => {
                 answerOptions.innerHTML += `
-                <div class="answers-options" onclick="checkAnswer(this);">
+                <div class="answers-options" onclick="checkAnswer(this, ${answer.isCorrectAnswer});">
                     <img src="${answer.image}">
                     <p class="normal-answer">${answer.text}</p>
                 </div>`;
@@ -467,20 +467,26 @@ function randomizeAnswers(answerArray) {
     answerArray.sort(() => Math.random() - 0.5);
 }
 
-function checkAnswer(element) {
-    const allAnswers = element.parentNode.querySelectorAll("div");
-    allAnswers.forEach((answerBox) => {
-        answerBox.classList.add("opacity");
-        answerBox.removeAttribute("onclick");
-        answerBox.querySelector("p").classList.add("wrong-answers");
-    });
-    element.classList.remove("opacity");
-    element.querySelector("p").classList.remove("wrong-answers");
-    element.querySelector("p").classList.add("right-answers");
+function checkAnswer(element , boolean) {
+    // if (boolean === true) {
+        console.log(element)
+        const allAnswers = element.parentNode.querySelectorAll("div");
+        allAnswers.forEach((answerBox) => {
+            answerBox.classList.add("opacity");
+            answerBox.removeAttribute("onclick");
+            answerBox.querySelector("p").classList.add("wrong-answers");
+        });
+        element.classList.remove("opacity");
+        element.querySelector("p").classList.remove("wrong-answers");
+        element.querySelector("p").classList.add("right-answers");
+    // } else {
+
+    // }
     const nextQuestion = element.parentNode.parentNode.nextSibling;
-    if(nextQuestion !== null) {
+    if(nextQuestion !== null) { //validação esta com bug
         setTimeout(scrollToNextQuestion, 2000, nextQuestion);
     } else {
+        checkResults();
         mainDiv.innerHTML += `<div class="result-box flex-container">
         <div class="colored-result-box flex-container" style="background-color: blue;">
             <p>${question.title}</p>
@@ -517,5 +523,14 @@ function resetQuizz() {
     });
 }
 
-//homepage();
+function checkResults() {
+    const rightAnswers = document.querySelectorAll(".right-answers").length;
+    const questions = openedQuizz.data.questions.length;
+    console.log(rightAnswers)
+    console.log(questions)
+    const porcentage = (rightAnswers/questions) * 100;
+    console.log(porcentage)
+}
+
+homepage();
 
