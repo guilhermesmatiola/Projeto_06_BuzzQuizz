@@ -82,6 +82,7 @@ h3 {
     width: 727px;
     height: 99px;
     margin-bottom: 18px;
+    background-color: #EC362D;
 }
 
 .colored-result-box > p {
@@ -110,6 +111,7 @@ h3 {
     font-size: 19px;
     font-weight: 700;
     color: #484848;
+    word-wrap: break-word;
 }
 
 .buttons {

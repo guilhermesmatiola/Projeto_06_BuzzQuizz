@@ -27,22 +27,17 @@ let level ={
 };
 const userQuizzListStoraged = localStorage.getItem("quizzes");
 const mainDiv = document.querySelector("main");
+const scrollInterval = 2000;
 let openedQuizz;
 let rightAnswersCounter = 0;
+let levelIndex = 0;
 
 
 function homepage(){
-   // limpar();
     document.querySelector(".quizz-title-box").innerHTML ="";
     getUserQuizzes();
     getQuizzes();
 }
-
-// function limpar(){
-//     var div = document.getElementById('selecionar');
-//     div.quizz-title-box.remove('quizz-title-box');
-
-// }
 
 function getUserQuizzes() {
     if (userQuizzListStoraged === null) {
@@ -59,24 +54,23 @@ function getUserQuizzes() {
     } else {
         mainDiv.innerHTML =`
             <div class="first-pageQuizzes">
-                <div class="insert-quizz flex-container">
-                    <p class="null-quizz">Você ainda não inseriu <br> nenhum quizz :(</p>
-                    <button class="create-quizz-button" onclick="createQuizz();">Criar Quizz</button>
-                </div>  
+                <h2>Seus Quizzes</h2>
+                <button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button>
+                <div class="user-quizzes">
+                </div>
             </div>
             <h2> Todos os quizzes</h2>
             <div class="other-quizzes"></div>
             `;
-        // <button onclick="createQuizz();"><ion-icon name="add-circle"></ion-icon></button> 
      }
 }
 
-function getQuizzes(){ //faz get na lista de quizzes
+function getQuizzes(){
     let promise = axios.get('https://mock-api.driven.com.br/api/v6/buzzquizz/quizzes');
     promise.then(printQuizzes);
 }
 
-function printQuizzes(quizzes){ //mostra a lista de quizzes no html
+function printQuizzes(quizzes){
     const otherQuizzes = document.querySelector(".other-quizzes");
     const listaQuizz = quizzes.data;
     for (let i = 0; i < listaQuizz.length; i++) {
@@ -107,8 +101,7 @@ function createQuizz() {
             <input id="i4" placeholder="Quantidade de níveis do quizz" type="number" min="2" required>
         </div>
         <button class="create-question-button" onclick="readINFOSQuizz();">Prosseguir pra criar perguntas</button>
-    `
-                                                      //questionsCreate();
+    `;
 }
 
 function readINFOSQuizz(){
@@ -141,7 +134,7 @@ function readINFOSQuizz(){
     createdQuizz.image=image;
     questionsCreate();
 }
-function isValidHttpUrl(string) { //verifica se a string é url
+function isValidHttpUrl(string) {
     let url;
     try {
       url = new URL(string);
@@ -216,7 +209,7 @@ function questionsCreate(){
     
     mainDiv.innerHTML+=`
     <button class="create-levels-button" onclick="readINFOQuizzPg2();">Prosseguir pra criar níveis</button>                                
-    `;                                          //levelsCreate();
+    `;
 }
 function isAcolor(){
     alert("Insira uma cor no formato '#'+ 6 caracteres de A a F e ou 0 a 9");
@@ -278,7 +271,7 @@ function readINFOQuizzPg2() {
             alert("Insira uma URL de imagem valida");
             return;
         }
-        answer.isCorrectAnswer=true;//////////////////////////////////////////
+        answer.isCorrectAnswer=true;
         question.answers[0]=answer;
 
         answer.text=document.getElementById(`a${i+1}5`).value;
@@ -320,18 +313,9 @@ function readINFOQuizzPg2() {
         }
         answer.isCorrectAnswer=false;
         question.answers[3]=answer;
-
-        
-        // if(document.getElementById(`a${i+1}3`).value && document.getElementById(`a${i+1}5`) == null){
-        //     alert("o texto das respostas não pode estar vazio");
-        //     return;
-        // }
-        
-        
-
         createdQuizz.questions[i]=question;
     }
-    function isValidHttpUrl(string) { //verifica se a string é url
+    function isValidHttpUrl(string) {
         let url;
         try {
           url = new URL(string);
@@ -406,7 +390,7 @@ function readINFOQuizzPg3() {
         if(!isValidHttpUrl(level.image)){
             alert("Insira um URL de imagem válida");
         }
-        function isValidHttpUrl(string) { //verifica se a string é url
+        function isValidHttpUrl(string) {
             let url;
             try {
               url = new URL(string);
@@ -508,17 +492,17 @@ function checkAnswer(element) {
     }
     const nextQuestion = element.parentNode.parentNode.nextSibling;
     if(nextQuestion !== null) { //validação esta com bug
-        setTimeout(scrollToNextQuestion, 2000, nextQuestion);
+        setTimeout(scrollToNextQuestion, scrollInterval, nextQuestion);
     } else {
-        checkResults();
+        let percent = checkResults();
         mainDiv.innerHTML += `<div class="result-box flex-container">
-        <div class="colored-result-box flex-container" style="background-color: blue;">
-            <p>${question.title}</p>
+        <div class="colored-result-box flex-container">
+            <p>${percent}% de acerto: ${openedQuizz.data.levels[levelIndex].title}</p>
         </div>
         <div class="results flex-container">
-            <img src="" alt="thumb">
+            <img src="${openedQuizz.data.levels[levelIndex].image}" alt="thumb">
             <div class="text">
-                <p>Parabéns Potterhead! Bem-vindx a Hogwarts, aproveite o loop infinito de comida e clique no botão abaixo para usar o vira-tempo e reiniciar este teste.</p>
+                <p>${openedQuizz.data.levels[levelIndex].text}</p>
             </div>
         </div>
     </div>
@@ -551,7 +535,15 @@ function resetQuizz() {
 function checkResults() {
     const questions = openedQuizz.data.questions.length;
     const porcentage = Math.floor((rightAnswersCounter/questions) * 100);
-    
+    const numberOfLevels = openedQuizz.data.levels.length;
+    for(let i = 0; i < numberOfLevels; i++) {
+        if (porcentage < openedQuizz.data.levels[i].minValue) {
+            levelIndex = i;
+        } else {
+            levelIndex = i - 1
+        }
+    }
+    return porcentage;
 }
 
 homepage();
