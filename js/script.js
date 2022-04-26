@@ -454,7 +454,7 @@ function openQuizz(quizzId) {
             const answerOptions = list.lastElementChild.lastElementChild;
             question.answers.map((answer) => {
                 answerOptions.innerHTML += `
-                <div class="answers-options" onclick="checkAnswer(this, ${answer.isCorrectAnswer});">
+                <div class="answers-options ${answer.isCorrectAnswer}" onclick="checkAnswer(this);">
                     <img src="${answer.image}">
                     <p class="normal-answer">${answer.text}</p>
                 </div>`;
@@ -467,21 +467,28 @@ function randomizeAnswers(answerArray) {
     answerArray.sort(() => Math.random() - 0.5);
 }
 
-function checkAnswer(element , boolean) {
-    // if (boolean === true) {
-        console.log(element)
+function checkAnswer(element) {
+    if (element.classList.contains("true") === true) {
         const allAnswers = element.parentNode.querySelectorAll("div");
-        allAnswers.forEach((answerBox) => {
-            answerBox.classList.add("opacity");
-            answerBox.removeAttribute("onclick");
-            answerBox.querySelector("p").classList.add("wrong-answers");
+        allAnswers.forEach((answers) => {
+            answers.classList.add("opacity");
+            answers.removeAttribute("onclick");
+            answers.querySelector("p").classList.add("wrong-answers");
         });
         element.classList.remove("opacity");
         element.querySelector("p").classList.remove("wrong-answers");
         element.querySelector("p").classList.add("right-answers");
-    // } else {
-
-    // }
+    } else {
+        const allAnswers = element.parentNode.querySelectorAll("div");
+        allAnswers.forEach((answers) => {
+            answers.classList.add("opacity");
+            answers.removeAttribute("onclick");
+            answers.querySelector("p").classList.add("wrong-answers");
+        });
+        element.classList.remove("opacity");
+        element.parentNode.querySelector(".true").querySelector("p").classList.remove("wrong-answers");
+        element.parentNode.querySelector(".true").querySelector("p").classList.add("right-answers");
+    }
     const nextQuestion = element.parentNode.parentNode.nextSibling;
     if(nextQuestion !== null) { //validação esta com bug
         setTimeout(scrollToNextQuestion, 2000, nextQuestion);
